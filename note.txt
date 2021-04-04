@@ -1,0 +1,10 @@
+	<div class="todo_list">
+			<h1>ToDoList</h1>
+			<div class="creat_new_todo">
+				<input type="text" class="message" placeholder="Description" />
+				<button clas="add">Add</button>
+			</div>
+		</div>
+        <div class="wrapper">
+			<ul class="todo"></ul>
+		</div>

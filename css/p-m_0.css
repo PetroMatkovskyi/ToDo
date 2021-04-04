@@ -1,0 +1,21 @@
+p,
+h1,
+h2,
+h3,
+h4,
+div,
+ul,
+li,
+nav,
+a,
+hr,
+button,
+img,
+span,
+p,
+label,
+input,
+form {
+	margin: 0;
+	padding: 0;
+}

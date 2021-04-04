@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+p,
+h1,
+h2,
+h3,
+h4,
+div,
+ul,
+li,
+nav,
+a,
+hr,
+button,
+img,
+span,
+p,
+label,
+input,
+form {
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #534939;
+	scroll-behavior: smooth;
+	--accent-font-family: 'Bree Serif', serif;
+	--accent-color: #f09b13;
+}
+
+body {
+	display: grid;
+	grid-template-columns: 30% 70%;
+	min-height: 100vh;
+}
+
+.item {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+nav {
+	background-color: aqua;
+}
+
+main {
+	background: coral;
+}
+
+.label {
+	width: 30px;
+	height: 30px;
+}
