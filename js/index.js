@@ -4,7 +4,8 @@ const addMessage = document.querySelector('.message'),
   body = document.querySelector('body');
 
 class WorkWithToDo {
-  #num;
+  #num = 0;
+  #list = 'myDay';
   constructor() {}
   // Придумати як обновляти сторінку. Або з видаленням всього або точково.
   //  Може ввести пееключатель для показу підгружена чи сторінка (true)
@@ -18,12 +19,29 @@ class WorkWithToDo {
     }
   }
 
+  get taskList() {
+    return this.#list;
+  }
+  // !!!!!!====!!!!!
+  set changList(list) {
+    if (typeof list === 'string') {
+      for (let item in todoList[this.numList].toDo) {
+        if (item === list) {
+          this.#list = list;
+        }
+      }
+    }
+  }
+
   renderTaskList() {
     let list = document.getElementById('list');
-    let profile = todoList[0];
+    list.innerHTML = '';
+    let profile = todoList[this.numList];
     let str = '';
+
     // покищо працює тільки з першим користуваче myDay
-    profile.toDo.myDay.forEach((item, index) => {
+
+    profile.toDo[this.taskList].forEach((item, index) => {
       str += `
       <li id='item_${index}'>
       <input type='checkbox' class='item_${index} check_task' ${
@@ -39,17 +57,22 @@ class WorkWithToDo {
   }
 
   renderToDo(insert) {
-    let profile = todoList[this.numList];
+    // let profile = todoList[this.numList];
+    // поміняти
+
+    let profile = todoList[0];
+    insert.innerHTML = '';
+
     insert.insertAdjacentHTML(
       'afterbegin',
       `<nav>
       <div id='login'><p>${profile.login}</p></div>
-    <div class="item" id="my_day">
-      <img class="label" src="img/sun.png" alt="sun" />
+    <div class="item name_list" id="myDay">
+      <img class="label " src="img/sun.png" alt="sun" />
       <h2>My day</h2>
       <p class="count">${profile.toDo.myDay.length}</p>
     </div>
-    <div class="item" id="important">
+    <div class="item name_list" id="important">
       <img class="label" src="img/star.png" alt="star" />
       <h2>Important</h2>
       <p class="count">${profile.toDo.important.length}</p>
@@ -141,22 +164,25 @@ class WorkWithToDo {
       important: false,
     };
 
-    todoList[0].toDo.myDay.push(newTask);
+    todoList[this.numList].toDo[this.taskList].push(newTask);
   }
 
-  removeTask() {}
+  removeTask(numTask) {
+    let task = todoList[this.numList].toDo[this.taskList];
+    console.log(task, numTask);
+    task.splice(numTask, 1);
+  }
 }
 
-const ToDo = new WorkWithToDo();
-const newTask = document.getElementById('new_task');
+const ToDo = new WorkWithToDo(),
+  newTask = document.getElementById('new_task');
 
 let todoList = [];
 
 if (ToDo.checkToDoInStorage()) {
   todoList = ToDo.upload();
-} else {
-  // !!!
 }
+
 document.addEventListener('click', (event) => {
   // Відправка нової таски в список
   if (event.target.classList.contains('addTask')) {
@@ -165,13 +191,27 @@ document.addEventListener('click', (event) => {
       ToDo.addTask(newTask.value);
       ToDo.saveToDo();
       ToDo.renderToDo(body);
-
+      ToDo.renderTaskList();
       console.log(newTask.value);
     }
   }
   if (event.target.classList.contains('remove_task')) {
+    // Знаходження номер таски
+    const regexp = /\d+/;
+    let numTask = Number(event.target.classList.value.match(regexp).join(''));
+    const task = todoList[0].toDo['myDay'];
+    // console.log(task);
+    ToDo.removeTask(numTask);
+    ToDo.saveToDo();
+    ToDo.renderToDo(body);
+    ToDo.renderTaskList();
+  }
+  if (event.target.classList.contains('name_list')) {
+    let id = event.target.id;
+    ToDo.changList = id;
+    ToDo.renderTaskList();
+    console.log(ToDo.taskList);
   }
 });
-// При вході в прогу створити змінну з списком туду за логіном і при виборі мій день чи важливе також(зроблено через анонімне поле)
-// підгружати і працювати тільки з одним профілем а не із усіма(зроблено через анонімне поле)
+
 // Потрібно поле для мого дня і важливого !!!

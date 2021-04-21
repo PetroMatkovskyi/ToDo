@@ -241,7 +241,7 @@ class CheckValidForm {
 const validate = new CheckValidForm();
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderForm.renderLoginForm(body);
+  // renderForm.renderLoginForm(body);
 
   let form = document.getElementById('#form');
 
@@ -270,14 +270,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Перевірка і пошук юзера!
 
   async function check(e) {
-    // renderForm.removeForm();
-    // ToDo.renderToDo(body);
+    renderForm.removeForm();
+    ToDo.renderToDo(body);
 
-    if (ToDo.findUser('#check_form') >= 0) {
-      renderForm.removeForm();
-      ToDo.renderToDo(body);
-      console.log('findUse');
-    }
+    // if (ToDo.findUser('#check_form') >= 0) {
+    //   renderForm.removeForm();
+    //   ToDo.renderToDo(body);
+    //   console.log('findUse');
+    // }
     // Включити!!!
   }
 
@@ -291,10 +291,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ToDo.saveToDo();
       renderForm.removeForm();
       // Розкоментувати!!!!
-      ToDo.renderToDo(body);
-      ToDo.renderTaskList();
+      // ToDo.renderToDo(body);
+      // ToDo.renderTaskList();
     }
   }
 });
-// ToDo.renderToDo(body);
-// ToDo.renderTaskList();
+ToDo.renderToDo(body);
+ToDo.renderTaskList();
