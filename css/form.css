@@ -1,0 +1,37 @@
+#form_container {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgb(0, 0, 0, 0);
+  transition: background 0.2s ease-in;
+}
+
+.form_body {
+  width: 250px;
+  border-radius: 5px;
+  margin: 0 auto;
+  background: #fff;
+  /* transform: translateY(-200px); */
+  transition: 0.2s ease-in transform;
+}
+
+.form_body,
+#form_container {
+  opacity: 1;
+  z-index: 999;
+}
+
+.form_input._error {
+  box-shadow: 0 0 15px red;
+}
+
+._inert {
+  display: none;
+}
+
+/* ._inactive {
+  display: none;
+  color: rgb(0, 80, 80);
+} */
