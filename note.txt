@@ -1,3 +1,0 @@
-<p>${data.main.weather.name} ${Math.ceil(
-        data.main.weather.main.temp - 272.15
-      )}°</p>
