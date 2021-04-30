@@ -7,28 +7,160 @@
   --accent-font-family: 'Bree Serif', serif;
   --accent-color: #f09b13;
 }
-/* 
+
 body {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 30vw 60vw;
   min-height: 100vh;
-} */
+  position: relative;
+  /* background-image: url(/img/lake.jpg); */
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding-right: 10px;
+}
 
-.item {
+nav,
+main {
+  margin: 5px;
+  border-radius: 10px;
+}
+
+h1 {
+  margin: 5px;
+  text-align: center;
+  color: rgb(153, 196, 84);
+}
+
+.list_container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+}
+
+.list_container:hover {
+  color: #f09b13;
+}
+
+.list_container .active {
+  color: #81c260;
+}
+
+.count {
+  font-size: 22px;
+  font-style: italic;
+}
+
+.item_list {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 5px 10px;
+  background: bisque;
+  border-radius: 5px;
+  min-height: 30px;
+}
+
+.item_list div {
+  display: flex;
+  align-items: center;
+}
+
+.item_list label {
+  word-wrap: break-word;
+  margin: 0 10px;
 }
 
 nav {
-  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(110, 120, 134, 0.781);
+  max-width: 260px;
 }
 
 main {
-  background: coral;
+  min-width: 100%;
+  padding: 15px;
+  background: rgba(199, 199, 199, 0.856);
+  position: relative;
 }
 
 .label {
   width: 30px;
   height: 30px;
+  border-radius: 15px;
 }
+
+.remove_task {
+  background: initial;
+  border: none;
+  border-radius: 10px;
+}
+
+.remove_task:hover {
+  background-color: rgba(199, 199, 199, 0.856);
+}
+
+.remove_task:active {
+  color: red;
+}
+
+ul li {
+  font-size: 18px;
+  list-style-type: none;
+}
+
+.incorect {
+  color: red;
+  font-size: 13px;
+}
+.done {
+  background: rgba(160, 197, 193, 0.637);
+}
+.done label {
+  text-decoration: line-through;
+}
+
+/* Інпут вводу таски */
+
+.wide {
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  bottom: 1.5rem;
+  min-width: 80%;
+}
+
+#new_task {
+  border: 1px solid #cf5757;
+  border-radius: 10px;
+  display: block;
+  height: 30px;
+  padding: 10px 30px;
+  width: 100%;
+}
+
+.addTask {
+  background: #bba5a5;
+  margin-left: 5px;
+  border: 0;
+  border-radius: 10px;
+  border-radius: 10px;
+  border-right: 1px solid #cbcbcc;
+  display: block;
+  float: right;
+  height: 52px;
+  width: 52px;
+}
+
+.addTask:hover {
+  background: #f06420;
+}
+
+.addTask:active {
+  background-color: #62a142;
+}
+/* Інпут вводу таски */

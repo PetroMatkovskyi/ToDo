@@ -1,6 +1,6 @@
 const quotes = [
   {
-    creator: 'У. Клемент Стоун (W. Clement Stone)',
+    creator: 'У. Клемент Стоун',
     phrase: 'Чітка мета – перший крок до будь-якого досягнення.',
   },
   {
@@ -8,45 +8,45 @@ const quotes = [
     phrase: 'Швидко, це повільно без зупинок',
   },
   {
-    creator: 'Альберт Ейнштейн (Albert Einstein)',
-    phrase: 'Прагніть бути не просто успішною людиною, а цінним.',
+    creator: 'Альберт Ейнштейн',
+    phrase: 'Прагніть бути не просто успішною людиною, а й цінною.',
   },
   {
-    creator: 'Чарльз Свіндол (Charles Swindoll)',
+    creator: 'Чарльз Свіндол',
     phrase:
       'Життя на 10% складається з того, що з вами відбувається і 90%, з того, як ви на це реагуєте.',
   },
   {
-    creator: 'Христофор Колумб (Christopher Columbus',
+    creator: 'Христофор Колумб',
     phrase:
       'Ти ніколи не перепливеш океан, якщо боятимешся втратити берег із виду.',
   },
   {
-    creator: 'Зіг Зиглар (Zig Ziglar)',
+    creator: 'Зіг Зиглар',
     phrase:
       'Говорять, що мотивація триває не довго. Що ж, свіжість після ванни – теж. Тому піклуватися про них варто щодня.',
   },
   {
-    creator: 'Антуан де Сент-Екзюпері (Antonie de Saint – Exupery)',
+    creator: 'Антуан де Сент-Екзюпері',
     phrase:
       'Досконалість – це не тоді, коли нічого додати, а тоді, коли нічого відняти.',
   },
   {
-    creator: 'Теодор Рузвельт (Theodore Roosevelt)',
+    creator: 'Теодор Рузвельт',
     phrase: 'Повірте, що зможете, і пів шляху вже пройдено.',
   },
   {
-    creator: 'Хелен Келлер (Helen Keller)',
+    creator: 'Хелен Келлер',
     phrase:
       'Коли закриваються одні двері в щастя, відкривається інша. Але ми часто занадто довго дивимося на закриті двері, щоб побачити, що нам відкрилося.',
   },
   {
-    creator: 'Майя Енджелоу (Maya Angelou)',
+    creator: 'Майя Енджелоу',
     phrase:
       'Життя вимірюється не кількістю наших вдохів, а кількістю моментів, від яких перехоплює дихання.',
   },
   {
-    creator: 'Шеріл Сендберг (Sheryl Sandberg)',
+    creator: 'Шеріл Сендберг',
     phrase:
       'Якщо вам запропонували місце на космічному кораблі, не запитуйте, яке місце! Встрибуйте всередину!',
   },
@@ -61,40 +61,40 @@ const quotes = [
       'Ти не впадеш, якщо не підіймаєшся в гору. Але яка радість від цілого життя, проведеного на землі.',
   },
   {
-    creator: 'Вінс Ломбарді (Vince Lombardi)',
+    creator: 'Вінс Ломбарді',
     phrase:
       'Одна перемога не веде до успіху, на відміну від постійного бажання перемагати.',
   },
   {
-    creator: 'Альберт Ейнштейн (Albert Einstein)',
+    creator: 'Альберт Ейнштейн',
     phrase:
       'Людина, яка ніколи не здійснювала помилок, ніколи не пробувала зробити щось по-іншому.',
   },
   {
-    creator: 'Фарра Грей (Farrah Gray)',
+    creator: 'Фарра Грей',
     phrase:
       'Здійснюйте свої мрії, або хтось візьме вас на роботу для здійснення своїх.',
   },
   {
-    creator: 'Опра Уінфрі (Oprah Winfrey)',
+    creator: 'Опра Уінфрі',
     phrase:
       'Якщо ви цінуєте те, що у вас вже є в житті, ви завжди отримуватимете ще більше. Якщо думати лише про те, чого у вас немає – вам ніколи не буде досить.',
   },
   {
-    creator: 'Далай-лама (Dalai Lama)',
+    creator: 'Далай-лама',
     phrase: 'Запам’ятайте, іноді не отримати бажаного – найбільша удача.',
   },
   {
-    creator: 'Бенджамін Франклін (Benjamin Franklin)',
+    creator: 'Бенджамін Франклін',
     phrase:
       'Або напишіть книгу, варту уваги, або зробіть щось, варте написання книги.',
   },
   {
-    creator: 'Стів Джобс (Steve Jobs)',
+    creator: 'Стів Джобс',
     phrase: 'Єдиний спосіб зробити видатну роботу – щиро любити те, що робиш.',
   },
   {
-    creator: 'Зіг Зіглар (Zig Ziglar)',
+    creator: 'Зіг Зіглар',
     phrase: 'Якщо ти можеш щось уявити – ти можеш цього досягти!',
   },
   {
@@ -126,31 +126,3 @@ const quotes = [
     phrase: 'Все можна зробити краще, ніж робилось до тепер',
   },
 ];
-
-let [dateNow, mounthNow] = new Date().toLocaleDateString().split('.');
-
-function outputQuotes() {
-  let check = {};
-
-  if (localStorage.getItem('check')) {
-    check = JSON.parse(localStorage.getItem('check'));
-  }
-
-  return function () {
-    if (
-      !check.dataToday ||
-      !check.mounthToday ||
-      dateNow !== check.dataToday ||
-      mounthNow !== check.mounthToday
-    ) {
-      [check.dataToday, check.mounthToday] = [dateNow, mounthNow];
-      check.randomNum = Math.ceil(Math.random() * quotes.length);
-    }
-    localStorage.setItem('check', JSON.stringify(check));
-    return check.randomNum;
-  };
-}
-const ran = outputQuotes();
-
-// console.log(`${quotes[ran()].phrase}
-//                                      ${quotes[ran()].creator}`);

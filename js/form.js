@@ -20,7 +20,8 @@ class RenderForm {
     if (this.check) {
       insert.insertAdjacentHTML(
         'afterbegin',
-        `<div id="sing_in" class="form_container _inactive form_sing_in">
+        `<div id='form_container'>
+        <div id="sing_in" class=" _inactive form_sing_in">
         <form id="check_form" action="#" class="form_body sing_in">
           <div class="form_item">
             <label for="formName" class="form_label">Your login*</label>
@@ -44,6 +45,8 @@ class RenderForm {
             />
             <p class="incorect"></p>
           </div>
+          <div id=buttons_container>
+          <div id='form_buttons'>
           <button
             id="check_submit"
             class="form_button check_submit"
@@ -53,14 +56,22 @@ class RenderForm {
             submit
           </button>
           <button type="reset">reset</button>
-          <p class="change_form">Log in</p>
+          </div>
+          <button class="change_form">Log in</button>
+          </div>
         </form>
-      </div>`
+        </div>
+        <div id='quote_container'><p id='quote'>${widgets.getQoute()[0]}</p>
+        <p id='creator'>${widgets.getQoute()[1]}</p>
+        </div>
+        </div>`
       );
     } else {
       insert.insertAdjacentHTML(
         'afterbegin',
-        ` <div id="log_in" class="form_container form_log_in">
+
+        `<div id='form_container'> 
+        <div id="log_in" class="form_log_in">
         <form action="#" class="form_body form_log_in" id="form">
           <div class="form_item">
             <label for="formName" class="form_label">Your login*</label>
@@ -106,12 +117,25 @@ class RenderForm {
             />
             <p class="incorect"></p>
           </div>
-          <button id="submit" class="form_button submit" name="submit" type="submit">
+          <div id=buttons_container>
+          <div id='form_buttons'>
+          <button
+            id="submit"
+            class="form_button check_submit"
+            name="submit"
+            type="submit"
+          >
             submit
           </button>
-          <button class="form_button" type="reset" name="reset">reset</button>
-          <p class="change_form">Sing in</p>
+          <button type="reset">reset</button>
+          </div>
+          <button class="change_form">Sing in</button>
+          </div>
         </form>
+      </div>    
+      <div id='quote_container'><p id='quote'>${widgets.getQoute()[0]}</p>
+      <p id='creator'>${widgets.getQoute()[1]}</p>
+      </div>
       </div>`
       );
     }
@@ -119,7 +143,7 @@ class RenderForm {
   }
 
   removeForm() {
-    let form = document.querySelector('.form_container');
+    let form = document.querySelector('#form_container');
     form.remove();
   }
 }
@@ -159,17 +183,17 @@ class CheckValidForm {
   checkForm(e, typeForm) {
     let error = 0;
     let formReq = document.querySelectorAll(`${typeForm} ._req`);
+    let incorect = document.querySelectorAll(`${typeForm} .incorect`);
 
     for (let i = 0; i < formReq.length; i++) {
       const input = formReq[i];
       forForm.removeError(formReq[i]);
       switch (true) {
         case input.classList.contains('_login'):
-          for (let i in todoList) {
-            if (todoList[i].login === input.value) {
+          for (let i in data.todoList) {
+            if (data.todoList[i].login === input.value) {
               forForm.addError(input);
               error++;
-              console.log('Логін вжу існує');
             }
           }
           break;
@@ -179,7 +203,7 @@ class CheckValidForm {
           error++;
           break;
         case input.value === '':
-          console.log('Заповніть всі поля');
+          incorect[i]('Заповніть поле');
           forForm.addError(input);
           error++;
           break;
@@ -191,40 +215,45 @@ class CheckValidForm {
   isValidate(e, typeForm) {
     let error = 0;
     let formReq = document.querySelectorAll(`${typeForm} ._req`);
+    let incorect = document.querySelectorAll(`${typeForm} .incorect`);
 
+    incorect.forEach((item) => {
+      item.innerHTML = '';
+    });
     for (let i = 0; i < formReq.length; i++) {
       const input = formReq[i];
 
       forForm.removeError(formReq[i]);
       switch (true) {
         case input.value === '':
-          console.log('Заповніть всі поля');
           forForm.addError(input);
+          incorect[i].innerHTML = 'Заповніть поле';
           error++;
           break;
         case input.classList.contains('_login'):
-          for (let i in todoList) {
-            if (todoList[i].login === input.value) {
+          for (let i in data.todoList) {
+            if (data.todoList[i].login === input.value) {
               forForm.addError(input);
               error++;
-              console.log('Логін вжу існує');
+              incorect[i].innerHTML = 'Логін вжу існує';
             }
           }
           break;
         case input.classList.contains('_email'):
           if (validate.emailTest(input)) {
             forForm.addError(input);
+            incorect[i].innerHTML = 'Емейл не коректний';
             error++;
           }
           break;
         case input.classList.contains('_password') && input.value.length < 4:
-          console.log('Пароль повинен містити не менше 4 символів');
+          incorect[i].innerHTML = 'Пароль повинен містити не менше 4 символів';
           forForm.addError(input);
           error++;
           break;
         case input.classList.contains('_re_password') &&
           input.value !== formReq[i - 1].value:
-          console.log('Неправильно введений повторний пароль');
+          incorect[i].innerHTML = 'Неправильно введений повторний пароль';
           forForm.addError(input);
           error++;
           break;
@@ -241,7 +270,7 @@ class CheckValidForm {
 const validate = new CheckValidForm();
 
 document.addEventListener('DOMContentLoaded', () => {
-  // renderForm.renderLoginForm(body);
+  renderForm.renderLoginForm(body);
 
   let form = document.getElementById('#form');
 
@@ -270,31 +299,50 @@ document.addEventListener('DOMContentLoaded', () => {
   // Перевірка і пошук юзера!
 
   async function check(e) {
-    renderForm.removeForm();
-    ToDo.renderToDo(body);
+    if (ToDo.findUser('#check_form') >= 0) {
+      renderForm.removeForm();
+      ToDo.renderToDo(body);
 
-    // if (ToDo.findUser('#check_form') >= 0) {
-    //   renderForm.removeForm();
-    //   ToDo.renderToDo(body);
-    //   console.log('findUse');
-    // }
-    // Включити!!!
+      await widgets.getWeaher();
+      if (document.getElementById('weather')) {
+        document.getElementById('weather').innerHTML = '';
+        document.getElementById('weather').innerHTML = data.main.weather;
+      }
+      console.log('findUse');
+    }
   }
 
   // Створення нового юзера
 
   async function formSend(e) {
+    let form = document.querySelectorAll('form ._req');
+
     let error = validate.isValidate(form, '#form');
 
     if (error === 0) {
       ToDo.createNewUser(form);
       ToDo.saveToDo();
       renderForm.removeForm();
+
       // Розкоментувати!!!!
-      // ToDo.renderToDo(body);
-      // ToDo.renderTaskList();
+
+      ToDo.renderToDo(body);
+      ToDo.renderTaskList();
+
+      await widgets.getWeaher();
+      if (document.getElementById('weather')) {
+        document.getElementById('weather').innerHTML = '';
+        document.getElementById('weather').innerHTML = data.main.weather;
+      }
     }
   }
 });
-ToDo.renderToDo(body);
-ToDo.renderTaskList();
+// ToDo.renderToDo(body);
+// ToDo.renderTaskList();
+// widgets.getWeaher();
+// if (document.getElementById('weather')) {
+//   document.getElementById('weather').innerHTML = '';
+//   document.getElementById('weather').innerHTML = data.main.weather;
+// }
+
+// створити логіку для створення нового юзера і ВХІД ПІД ЙОГО ЛОГІНОМ
