@@ -9,21 +9,38 @@
 }
 
 body {
-  display: grid;
-  grid-template-columns: 30vw 60vw;
+  display: flex;
   min-height: 100vh;
   position: relative;
-  /* background-image: url(/img/lake.jpg); */
+  background-image: url(../img/3.jpg);
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
-  padding-right: 10px;
+  padding-right: 15px;
 }
 
 nav,
 main {
-  margin: 5px;
   border-radius: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#open_options {
+  font-family: 'Source Sans Pro', sans-serif;
+  background: none;
+  border: none;
+  font-size: 30px;
+}
+#open_options:hover {
+  color: var(--accent-color);
+}
+
+#open_options:active {
+  color: #62a142;
 }
 
 h1 {
@@ -60,7 +77,8 @@ h1 {
   padding: 5px 10px;
   background: bisque;
   border-radius: 5px;
-  min-height: 30px;
+  min-height: 40px;
+  max-width: 80%;
 }
 
 .item_list div {
@@ -78,11 +96,12 @@ nav {
   flex-direction: column;
   justify-content: space-between;
   background-color: rgba(110, 120, 134, 0.781);
-  max-width: 260px;
+  min-width: 20%;
 }
 
 main {
-  min-width: 100%;
+  margin-left: 20px;
+  min-width: 70%;
   padding: 15px;
   background: rgba(199, 199, 199, 0.856);
   position: relative;
@@ -98,13 +117,16 @@ main {
   background: initial;
   border: none;
   border-radius: 10px;
+  min-width: 15px;
 }
 
-.remove_task:hover {
+.remove_task:hover,
+#close_options:hover {
   background-color: rgba(199, 199, 199, 0.856);
 }
 
-.remove_task:active {
+.remove_task:active,
+#close_options:active {
   color: red;
 }
 
@@ -124,8 +146,6 @@ ul li {
   text-decoration: line-through;
 }
 
-/* Інпут вводу таски */
-
 .wide {
   display: flex;
   overflow: hidden;
@@ -135,12 +155,17 @@ ul li {
 }
 
 #new_task {
-  border: 1px solid #cf5757;
+  border: 2px solid #cf5757;
   border-radius: 10px;
   display: block;
   height: 30px;
   padding: 10px 30px;
   width: 100%;
+}
+
+#new_task:focus-visible {
+  outline: none;
+  border: 2px solid #62a142;
 }
 
 .addTask {
@@ -163,4 +188,82 @@ ul li {
 .addTask:active {
   background-color: #62a142;
 }
-/* Інпут вводу таски */
+
+/* options */
+
+#options {
+  position: fixed;
+  background: #534939;
+  min-height: 100%;
+  min-width: 10%;
+  right: 0;
+  text-align: right;
+  transform: translateX(200px);
+  transition: 0.5s ease-in transform;
+}
+
+#options_overley {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgb(0, 0, 0, 0);
+  transition: background 0.2s ease-in;
+}
+
+#options_overley,
+#options {
+  opacity: 0;
+  z-index: -1;
+}
+
+#options_overley.open #options {
+  transform: translateX(0);
+}
+
+#options_overley.hide #options {
+  transform: translateX(200px);
+}
+
+#options_overley.open {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#options_overley.hide {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#options_overley.open #options,
+#options_overley.open,
+#options_overley.hide #options,
+#options_overley.hide {
+  opacity: 1;
+  z-index: 999;
+}
+
+#close_options {
+  background: none;
+  font-size: 24px;
+  margin: 5px;
+  border: none;
+  border-radius: 10px;
+}
+
+#background {
+  display: grid;
+}
+
+#background img {
+  max-width: 80px;
+  margin: 5px;
+}
+#background img:hover {
+  box-shadow: 0 0 15px rgb(167, 156, 156);
+}
+
+#background img:active {
+  box-shadow: 0 0 15px rgb(236, 234, 95);
+}
+
+/* options */

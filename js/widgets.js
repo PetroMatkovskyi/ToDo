@@ -1,5 +1,55 @@
 let [dateNow, mounthNow] = new Date().toLocaleDateString().split('.');
 
+class Options {
+  #animationSpeed = 500;
+  #closing = false;
+  #option = document.getElementById('options_overley');
+
+  constructor() {}
+
+  get isClose() {
+    return this.#closing;
+  }
+
+  set changeClose(close) {
+    this.#closing = close;
+  }
+
+  get options() {
+    return this.#option;
+  }
+
+  get speed() {
+    return this.#animationSpeed;
+  }
+
+  open() {
+    let option = document.getElementById('options_overley');
+    if (!this.isClose && option) {
+      option.classList.add('open');
+    }
+  }
+
+  close() {
+    let option = document.getElementById('options_overley');
+
+    this.changeClose = true;
+    option.classList.remove('open');
+    option.classList.add('hide');
+    setTimeout(() => {
+      option.classList.remove('hide');
+      this.changeClose = false;
+    }, this.speed);
+  }
+
+  background(event) {
+    console.log(body.style.backgroundImage);
+    body.style.backgroundImage = `url(${event.target.src})`;
+  }
+}
+
+const options = new Options();
+
 class Widgets {
   constructor() {}
 
@@ -29,7 +79,6 @@ class Widgets {
       quotes[this.getRandomNum()].creator,
     ];
   }
-  // розібратись де і як зберігати результат запиту щоб оптимізувати його вивід(готовою строкою в main щоб потім зразуж вставляти в рендеринг???)
 
   getAutoRequest() {
     let m = data.main;

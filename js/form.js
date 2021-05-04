@@ -274,8 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let form = document.getElementById('#form');
 
-  // ???
-
   document.addEventListener('submit', (event) => {
     event.preventDefault();
     if (event.target.classList.contains('sing_in')) {
@@ -288,15 +286,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // !!! обєднати в індексі
   document.addEventListener('click', (event) => {
     if (event.target.classList.contains('change_form')) {
       renderForm.removeForm();
       renderForm.renderLoginForm(body);
     }
   });
-
-  // Перевірка і пошук юзера!
 
   async function check(e) {
     if (ToDo.findUser('#check_form') >= 0) {
@@ -312,8 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Створення нового юзера
-
   async function formSend(e) {
     let form = document.querySelectorAll('form ._req');
 
@@ -323,9 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ToDo.createNewUser(form);
       ToDo.saveToDo();
       renderForm.removeForm();
-
-      // Розкоментувати!!!!
-
       ToDo.renderToDo(body);
       ToDo.renderTaskList();
 
@@ -337,12 +327,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-// ToDo.renderToDo(body);
-// ToDo.renderTaskList();
-// widgets.getWeaher();
-// if (document.getElementById('weather')) {
-//   document.getElementById('weather').innerHTML = '';
-//   document.getElementById('weather').innerHTML = data.main.weather;
-// }
-
-// створити логіку для створення нового юзера і ВХІД ПІД ЙОГО ЛОГІНОМ

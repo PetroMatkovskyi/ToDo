@@ -4,7 +4,7 @@ const addMessage = document.querySelector('.message'),
   body = document.querySelector('body');
 
 class WorkWithToDo {
-  #num = 0;
+  #num;
   #list = 'myDay';
   constructor() {}
 
@@ -22,7 +22,6 @@ class WorkWithToDo {
     return this.#list;
   }
 
-  // !!!!!!====!!!!!
   set changList(list) {
     if (typeof list === 'string') {
       for (let item in data.todoList[this.numList].toDo) {
@@ -81,7 +80,10 @@ class WorkWithToDo {
    <main>
    <div>
    <h3></h3>
+   <section class='container'>
    <div id='weather'>${data.main.weather}</div>
+   <div id='options_container'><button id='open_options'>...</button></div>
+   </section>
    <div class="wrapper">   
    <ul id="list"></ul>
  </div>
@@ -90,7 +92,23 @@ class WorkWithToDo {
     <button class="addTask">Add</button>
     </div>
     </div>
-  </main>`
+  </main>
+  <section id='options_overley'>
+    <div id='options'>
+      <button id='close_options'>X</button>
+      <div>
+        <div id='background'>
+        <div>
+          <div> <img class='item_back' src="img/1.jpg" alt="1" /></div>
+          <div> <img class='item_back' src="img/2.jpg" alt="2" /></div>
+          <div> <img class='item_back' src="img/3.jpg" alt="3" /></div>
+          <div> <img class='item_back' src="img/4.jpg" alt="4" /></div>
+        </div>
+       </div>
+      </div>
+    </div>
+  </section>
+  `
     );
     this.activeList();
   }
@@ -130,12 +148,10 @@ class WorkWithToDo {
     return JSON.parse(localStorage.getItem('todo'));
   }
 
-  //Збереження в Local Storage
   saveToDo() {
     localStorage.setItem('todo', JSON.stringify(data));
   }
 
-  // знайти юзера
   findUser(typeForm) {
     let formReq = document.querySelectorAll(`${typeForm} ._req`);
     let incor = document.querySelectorAll('.incorect');
@@ -226,21 +242,33 @@ if (ToDo.checkToDoInStorage()) {
 }
 
 document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('addTask')) {
-    const newTask = document.getElementById('new_task');
+  switch (true) {
+    case event.target.classList.contains('addTask'):
+      const newTask = document.getElementById('new_task');
 
-    if (newTask.value !== '') {
-      ToDo.addTask(newTask.value);
+      if (newTask.value !== '') {
+        ToDo.addTask(newTask.value);
+        ToDo.render(body);
+      }
+      break;
+    case event.target.classList.contains('remove_task'):
+      ToDo.removeTask(event);
       ToDo.render(body);
-    }
-  }
-  if (event.target.classList.contains('remove_task')) {
-    ToDo.removeTask(event);
-    ToDo.render(body);
-  }
-  if (event.target.classList.contains('name_list')) {
-    ToDo.changList = event.target.id;
-    ToDo.render(body);
+      break;
+    case event.target.classList.contains('name_list'):
+      ToDo.changList = event.target.id;
+      ToDo.render(body);
+      break;
+    case event.target.id === 'open_options':
+      options.open();
+      break;
+    case event.target.id === 'close_options' ||
+      event.target.id === 'options_overley':
+      options.close();
+      break;
+    case event.target.classList.contains('item_back'):
+      options.background(event);
+      break;
   }
 });
 
