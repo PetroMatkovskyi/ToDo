@@ -98,7 +98,7 @@ class Widgets {
           const lat = pos.coords.latitude;
           const lon = pos.coords.longitude;
           const myKey = '60b62c649f5e75dc7b03da241b241954';
-          const requestURL = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${myKey}`;
+          const requestURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${myKey}`;
 
           fetch(requestURL)
             .then((response) => {
