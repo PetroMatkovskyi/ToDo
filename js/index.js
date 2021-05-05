@@ -81,7 +81,7 @@ class WorkWithToDo {
    <div>
    <h3></h3>
    <section class='container'>
-   <div id='weather'>${data.main.weather}</div>
+   <div id='weather'>${data.main.weather ? data.main.weather : ''}</div>
    <div id='options_container'><button id='open_options'>...</button></div>
    </section>
    <div class="wrapper">   
@@ -225,7 +225,7 @@ class WorkWithToDo {
     active.classList.add('active');
   }
 
-  render(body) {
+  reload(body) {
     this.saveToDo();
     this.renderToDo(body);
     this.renderTaskList();
@@ -248,16 +248,16 @@ document.addEventListener('click', (event) => {
 
       if (newTask.value !== '') {
         ToDo.addTask(newTask.value);
-        ToDo.render(body);
+        ToDo.reload(body);
       }
       break;
     case event.target.classList.contains('remove_task'):
       ToDo.removeTask(event);
-      ToDo.render(body);
+      ToDo.reload(body);
       break;
     case event.target.classList.contains('name_list'):
       ToDo.changList = event.target.id;
-      ToDo.render(body);
+      ToDo.reload(body);
       break;
     case event.target.id === 'open_options':
       options.open();
@@ -276,6 +276,6 @@ document.addEventListener('change', (event) => {
   if (event.target.classList.contains('check_task')) {
     let value = event.target.checked;
     ToDo.checkDoneTask(event, value);
-    ToDo.render(body);
+    ToDo.reload(body);
   }
 });

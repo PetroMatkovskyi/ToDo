@@ -67,6 +67,21 @@ button {
   border: 1px solid;
   min-width: 60px;
   min-height: 30px;
+  background: none;
+  border: 1px solid #f06420;
+}
+
+#form_buttons .check_submit:hover {
+  background: #62a14281;
+}
+
+#form_buttons .reset:hover {
+  background: #ff880081;
+  border-color: #62a142;
+}
+
+#form_buttons button:active {
+  color: #fff;
 }
 
 .change_form {

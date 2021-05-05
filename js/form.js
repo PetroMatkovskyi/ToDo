@@ -55,7 +55,7 @@ class RenderForm {
           >
             submit
           </button>
-          <button type="reset">reset</button>
+          <button class='reset' type="reset">reset</button>
           </div>
           <button class="change_form">Log in</button>
           </div>
@@ -127,7 +127,7 @@ class RenderForm {
           >
             submit
           </button>
-          <button type="reset">reset</button>
+          <button class='reset' type="reset">reset</button>
           </div>
           <button class="change_form">Sing in</button>
           </div>
@@ -297,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ToDo.findUser('#check_form') >= 0) {
       renderForm.removeForm();
       ToDo.renderToDo(body);
+      ToDo.renderTaskList();
 
       await widgets.getWeaher();
       if (document.getElementById('weather')) {

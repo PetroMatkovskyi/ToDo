@@ -55,6 +55,7 @@ h1 {
   justify-content: space-around;
   align-items: center;
   cursor: pointer;
+  margin: 10px 0;
 }
 
 .list_container:hover {
